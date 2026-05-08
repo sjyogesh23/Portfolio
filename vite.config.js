@@ -10,11 +10,10 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          'react-vendor':    ['react', 'react-dom'],
-          'firebase':        ['firebase/app', 'firebase/firestore', 'firebase/storage'],
-          'd3':              ['d3'],
-          'framer-motion':   ['framer-motion'],
-          'particles':       ['@tsparticles/react', '@tsparticles/slim'],
+          'react-vendor':  ['react', 'react-dom'],
+          'firebase':      ['firebase/app', 'firebase/firestore', 'firebase/storage'],
+          'd3':            ['d3'],
+          'framer-motion': ['framer-motion'],
         },
       },
     },
