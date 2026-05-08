@@ -1,0 +1,22 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: { '@': '/src' },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'react-vendor':    ['react', 'react-dom'],
+          'firebase':        ['firebase/app', 'firebase/firestore', 'firebase/storage'],
+          'd3':              ['d3'],
+          'framer-motion':   ['framer-motion'],
+          'particles':       ['@tsparticles/react', '@tsparticles/slim'],
+        },
+      },
+    },
+  },
+})

@@ -1,0 +1,196 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* ── Theme colors ─────────────────────────────────── */
+    --color-bg:      245 245 240;
+    --color-surface: 237 237 232;
+    --color-text:    26 26 46;
+    --color-muted:   110 110 130;
+    --color-border:  210 210 205;
+    --color-primary: 124 58 237;
+    --color-accent:  6 182 212;
+
+    /* ── Typography ───────────────────────────────────── */
+    --fs-hero:   4.5rem;
+    --fs-h1:     3rem;
+    --fs-h2:     2.25rem;
+    --fs-h3:     1.5rem;
+    --fs-body:   1rem;
+    --fs-small:  0.875rem;
+    --fw-bold:   700;
+    --fw-medium: 500;
+    --lh-body:   1.6;
+    --ls-heading: -0.02em;
+    --ls-body:    0em;
+
+    /* ── Layout ───────────────────────────────────────── */
+    --section-py:      6rem;
+    --section-px:      1.5rem;
+    --section-px-md:   4rem;
+    --container-max-w: 80rem;
+    --radius:          0.75rem;
+    --radius-lg:       1.25rem;
+    --anim-dur:        0.65s;
+    --card-hover-y:    4px;
+    --scrollbar-w:     6px;
+  }
+
+  .dark {
+    --color-bg:      20 20 24;
+    --color-surface: 30 30 36;
+    --color-text:    232 232 240;
+    --color-muted:   140 140 160;
+    --color-border:  50 50 62;
+    --color-primary: 139 92 246;
+    --color-accent:  34 211 238;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: rgb(var(--color-bg));
+    color: rgb(var(--color-text));
+    transition: background-color 400ms ease, color 300ms ease;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background-color: rgb(var(--color-primary) / 0.3);
+    color: rgb(var(--color-text));
+  }
+
+  ::-webkit-scrollbar {
+    width: var(--scrollbar-w, 6px);
+  }
+  ::-webkit-scrollbar-track {
+    background: rgb(var(--color-bg));
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgb(var(--color-primary) / 0.5);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgb(var(--color-primary) / 0.8);
+  }
+}
+
+@layer components {
+  .section-title {
+    font-size: var(--fs-h2);
+    font-weight: var(--fw-bold);
+    letter-spacing: var(--ls-heading);
+    @apply text-ctext mb-2;
+  }
+
+  .section-subtitle {
+    font-size: var(--fs-small);
+    @apply text-muted font-mono tracking-widest uppercase mb-12;
+  }
+
+  .section-padding {
+    padding-top:    var(--section-py);
+    padding-bottom: var(--section-py);
+    padding-left:   var(--section-px);
+    padding-right:  var(--section-px);
+  }
+
+  @media (min-width: 768px) {
+    .section-padding {
+      padding-left:  var(--section-px-md);
+      padding-right: var(--section-px-md);
+    }
+  }
+
+  .glass {
+    background: rgb(var(--color-surface) / 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgb(var(--color-border) / 0.5);
+  }
+
+  .glass-dark {
+    background: rgb(var(--color-bg) / 0.8);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgb(var(--color-border) / 0.4);
+  }
+
+  .gradient-text {
+    background: linear-gradient(135deg, rgb(var(--color-primary)), rgb(var(--color-accent)));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-border {
+    box-shadow: 0 0 0 1px rgb(var(--color-primary) / 0.3),
+                0 0 20px rgb(var(--color-primary) / 0.1);
+  }
+
+  .hex-clip {
+    clip-path: polygon(50% 0%, 93% 25%, 93% 75%, 50% 100%, 7% 75%, 7% 25%);
+  }
+
+  .card-hover {
+    @apply transition-all duration-300;
+  }
+  .card-hover:hover {
+    transform: translateY(calc(-1 * var(--card-hover-y)));
+    box-shadow: 0 20px 40px rgb(var(--color-primary) / 0.15);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Skills graph fullscreen - give the container a proper background and sizing */
+:fullscreen {
+  background: rgb(var(--color-bg));
+  display: flex;
+  flex-direction: column;
+}
+:fullscreen svg {
+  flex: 1;
+  width: 100% !important;
+}
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    rgb(var(--color-surface)) 25%,
+    rgb(var(--color-border) / 0.6) 50%,
+    rgb(var(--color-surface)) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+}
+
+/* Particle canvas */
+#tsparticles {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
