@@ -1,10 +1,12 @@
 import { useState } from 'react'
+import { safeUrl } from '@/utils/safeUrl'
 
 // Renders an <img> with a styled SVG fallback if the src is missing / broken
 export default function DefaultImage({ src, alt = '', className = '', style = {} }) {
-  const [errored, setErrored] = useState(!src)
+  const safeSrc = safeUrl(src)
+  const [errored, setErrored] = useState(!safeSrc)
 
-  if (errored || !src) {
+  if (errored || !safeSrc) {
     return (
       <div
         className={`flex items-center justify-center bg-surface border border-border ${className}`}
@@ -46,7 +48,7 @@ export default function DefaultImage({ src, alt = '', className = '', style = {}
 
   return (
     <img
-      src={src}
+      src={safeSrc}
       alt={alt}
       className={className}
       style={style}

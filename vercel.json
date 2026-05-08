@@ -1,0 +1,5 @@
+{
+  "rewrites": [
+    { "source": "/cooltex/:path*", "destination": "http://cooltex.co.in/:path*" }
+  ]
+}
