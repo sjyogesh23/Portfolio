@@ -123,7 +123,10 @@ function applyMeta(meta) {
   if (meta.ogTitle || meta.siteTitle)    { setMetaName('twitter:title',   meta.ogTitle || meta.siteTitle) }
   if (meta.ogDescription || meta.description) { setMetaName('twitter:description', meta.ogDescription || meta.description) }
   if (meta.ogImage)       { setMetaName('twitter:image',     meta.ogImage) }
-  if (meta.faviconUrl)    { setLink('icon', 'href', meta.faviconUrl) }
+  // Only set favicon if it's a secure URL — HTTP favicons are blocked on HTTPS pages
+  if (meta.faviconUrl && meta.faviconUrl.startsWith('https://')) {
+    setLink('icon', 'href', meta.faviconUrl)
+  }
 }
 
 // ── Section order defaults ────────────────────────────────────────────────────
